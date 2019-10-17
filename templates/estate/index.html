@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% block title %}
+	estat: Bienvenu(e)!
+{% endblock title %}
+	
+{% block header %}
+	<section class="hero-section">
+		<div class="hero-social-warp">
+			<div class="hero-social">
+				{% for sociallink in sociallinks  %}
+					<a href="{{sociallink.lien}}"><i class="fa {{sociallink.icone_classe}}"></i></a>
+				{% endfor %}
+			</div>
+		</div>
+		
+		
+		<div class="hero-slider owl-carousel owl-theme">
+			
+			{% for headerslide in headerslides %}
+			<div class="hs-item set-bg" data-setbg="{{headerslide.image.url}}">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-6 col-lg-7">
+							<h2>{{headerslide.description}}</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<!-- Hero details slider -->
+		<div class="hero-nav-slider-warp">
+			<div class="container">
+				<div class="hero-nav-slider owl-carousel">
+					
+					{% for headerslide in headerslides %}
+					<div class="hns-item">
+						<h5>{{headerslide.sous_titre}}</h5>
+						<p>{{headerslide.sous_description}}</p>
+						<span>$145,000</span>
+					</div>
+					{% endfor %}
+						
+				</div>
+			</div>
+		</div> 
+	</section>
+{% endblock header %}
+
+
+{% block content %}
+
+	<!-- features icons section -->
+	<div class="features-icons-section">
+		
+		{% for caracteristique in caracteristiques %}
+		<div class="features-icon-item">
+			<i class="{{caracteristique.icone_classe}}"></i>
+			<p>{{caracteristique.nom}}</p>
+		</div>
+		{% endfor %}
+	</div>
+	<!-- features icons section end-->
+
+	<!-- Intro section -->
+	<section class="intro-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>our houses</h2>
+			</div>
+			<div class="row">
+				
+				{% for house in houses %}
+				
+				{% if forloop.counter == 1 %}
+				<div class="col-lg-8">
+					<div class="intro-img-box">
+						<h4>{{house.type_maison.types}}</h4>
+						<img src="{{house.image_fascade.url}}" alt="">
+					</div>
+				</div>
+				<div class="col-lg-4 align-items-end d-flex">
+					<div class="intro-text-box">
+						<p>{{house.preview_text}}</p>
+						<a href="{% url 'house_details' house.slug %}" class="site-btn">MORE INFO</a>
+					</div>
+				</div>
+				{% else %}
+				<div class="col-lg-4 align-items-end d-flex order-2 order-lg-1">
+					<div class="intro-text-box">
+						<p>{{house.preview_text}} </p>
+						<a href="{% url 'house_details' house.slug %}" class="site-btn">MORE INFO</a>
+					</div>
+				</div>
+				<div class="col-lg-8 order-1 order-lg-2">
+					<div class="intro-img-box">
+						<h4>{{house.type_maison.types}}</h4>
+						<img src="{{house.image_fascade.url}}" alt="">
+					</div>
+				</div>	
+				{% endif %}
+					
+				
+				
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	<!-- Intro section end-->
+	
+	<!-- Design section end-->
+	<section class="design-section">
+		<div class="container">
+			<div class="section-title st-light">
+				<h2>our houses</h2>
+			</div>
+		</div>	
+		<div class="design-slider owl-carousel">
+			{% for interieur in interieurs %}
+			<a href="{{interieur.image.url}}" class="img-popup-gallery">
+				<img src="{{interieur.image.url}}" alt="">
+				<i class="flaticon-151-reading-glasses"></i>
+			</a>
+			{% endfor %}
+		</div>
+		{% for localistation in localistations %}
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="design-text text-white">
+						<h4>INTERIOR </h4>
+						<p>{{localistation.interieur_description}} </p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="design-text text-white">
+						<h4>ENVIORMENT FRIENDLY</h4>
+						<p>{{localistation.environnement_description}} </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</section>
+	<!-- Design section end-->
+	
+	<!-- Location section-->
+	<section class="location-section spad">
+		<div class="container">
+			<div class="section-title">
+				<h2>location</h2>
+			</div>
+			<div class="row">
+				{% for localistation in localistations %}
+				<div class="col-xl-10 offset-xl-1">
+					<div class="tab-content location-tab">
+						<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+							<img src="{{localistation.allentour.url}}" alt="">
+							<a href="{{localistation.video_allentour.url}}" class="play-btn"><img src="/static/img/play-icon.png" alt=""></a>
+						</div>	
+						<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+							<img src="{{localistation.interieur.url}}" alt="">
+							<a href="{{localistation.video_interieur.url}}" class="play-btn"><img src="/static/img/play-icon.png" alt=""></a>
+						</div>
+						<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
+							<img src="{{localistation.piscine.url}}" alt="">
+							<a href="{{localistation.video_oiscine.url}}" class="play-btn"><img src="/static/img/play-icon.png" alt=""></a>
+						</div>
+						<div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4">
+							<img src="{{localistation.vue.url}}" alt="">
+							<a href="{{localistation.video_vue.url}}" class="play-btn"><img src="/static/img/play-icon.png" alt=""></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-12">
+					<ul class="nav nav-tabs location-tab-nav" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">
+								<img src="{{localistation.allentour.url}}" alt="">
+								<h5>Surroundings</h5>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">
+								<img src="{{localistation.interieur.url}}" alt="">
+								<h5>Interior Design</h5>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">
+								<img src="{{localistation.piscine.url}}" alt="">
+								<h5>Comunity Pool</h5>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="4-tab" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">
+								<img src="{{localistation.vue.url}}" alt="">
+								<h5>Views</h5>
+							</a>
+						</li>
+					</ul>
+				</div>
+				{% endfor %}	
+			</div>
+		</div>
+	</section>
+	<!-- Location section end-->
+
+	<!-- Features section -->
+	<section class="features-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>features</h2>
+			</div>
+		</div>
+		<div class="features-slider owl-carousel">
+			
+			{% for trait in traits %}
+			<div class="feature-box">
+				<i class="{{trait.icone_classe}}"></i>
+				<h5>{{trait.nom}}</h5>
+				<p>{{trait.description}}. </p>
+			</div>
+			{% endfor %}	
+		</div>
+	</section>
+	<!-- Features section end-->
+
+	<!-- Call to action section -->
+	
+	{% for consultant in consultants %}
+	<section class="call-to-action-section set-bg" data-setbg="/static/img/cta-bg.jpg">
+		<div class="container text-white text-center">
+			<h2>Ask our top consultants for an personalized offer today. </h2>
+			<h3>{{consultant.nom}} {{consultant.prenoms}}. </h3> <br>
+			<button class="site-btn sb-light sb-big">CALL {{consultant.contact}}</button>
+		</div>
+	</section>
+	{% endfor %}
+		
+	
+	<!-- Call to action section end-->
+	
+	
+{% endblock content %}
+	
+	
+	

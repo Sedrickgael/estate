@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}
+	estat: Bienvenu(e)!
+{% endblock title %}
+	
+{% block header %}
+	<!-- Page top section -->
+	{% for headerslide in headerslides %}
+	<section class="page-top-section set-bg" data-setbg="{{headerslide.image.url}}">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="page-top-text text-white">
+						<h2>{{headerslide.page.titre}}</h2>
+						<p>{{headerslide.description}}.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+		
+	
+		
+		
+		<div class="hero-social-warp">
+			<div class="hero-social">
+			{% for sociallink in sociallinks  %}
+				<a href="{{sociallink.lien}}"><i class="fa {{sociallink.icone_classe}}"></i></a>
+			{% endfor %}
+			</div>
+		</div>
+		
+			
+	</section>
+	<!-- Page top section end -->
+	
+{% endblock header %}
+
+
+{% block content %}	
+	<!-- Contact section-->
+	<div id="app">
+	<section class="contact-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7 offset-lg-5">
+					<div class="contact-info-box">
+						<h5 class="contact-title">OFFICE</h5>
+						<div class="contact-info">
+							<div class="ci-item">
+								<img src="/static/img/icons/location.png" class="ci-icon" alt="">
+								<p>1385  Cedar Street, Black Rock, Arkansas, 72415</p>
+							</div>
+							<div class="ci-item">
+								<img src="/static/img/icons/headphone.png" class="ci-icon" alt="">
+								<p>870-878-6345<br>870-515-8691</p>
+							</div>
+						</div>
+						<h5 class="contact-title">QUICK HELLO</h5>
+						<div v-if="returntrue" class="alert alert-success" role="alert">
+							Votre message a bien été envoyé, merci!
+						</div>
+						<div v-if="returnfalse" class="alert alert-danger" role="alert">
+							Verifier que tous les champs sont bien remplis
+						</div>
+						<form class="contact-form">
+							<div class="form-field">
+								<img src="/static/img/icons/profile.png" alt="" >
+								<input v-model="nom_complet" type="text" placeholder="Nom complet">
+							</div>
+							<div class="form-field">
+								<img src="/static/img/icons/envelope.png" alt="" >
+								<input v-model="sujet" type="text" placeholder="Sujet">
+							</div>
+							<div class="form-field">
+								<img src="/static/img/icons/envelope.png" alt="" >
+								<input v-model="email" type="text" placeholder="Email">
+							</div>
+							<div class="form-field">
+								<img src="/static/img/icons/envelope.png" alt="" >
+								<input v-model="phone" type="tel" placeholder="Contact">
+							</div>
+							<div class="form-field">
+								<img src="/static/img/icons/chat.png" alt="" >
+								<textarea v-model="message" placeholder="Message"></textarea>
+							</div>
+							<button class="site-btn" type="submit"  v-on:click.prevent="submitForm">send</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Map -->
+		<div class="map">
+			
+			{% for identite in identites %}
+				<iframe src="{{identite.maps_link}}" frameborder="0" style="border:0"></iframe>
+			{% endfor %}
+				
+			
+		</div>
+	</section>
+	</div>
+	<!-- Contact section end-->
+{% endblock content %}

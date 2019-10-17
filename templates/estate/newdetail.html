@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+{% block title %}
+	estat: Bienvenu(e)!
+{% endblock title %}
+	
+{% block header %}
+	<!-- Page top section -->
+	{% for headerslide in headerslides %}
+		<section class="page-top-section set-bg" data-setbg="{{headerslide.image.url}}">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="page-top-text text-white">
+							<h2>{{headerslide.page.titre}}</h2>
+							<p>{{headerslide.description}}.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+			
+		
+			
+			
+			<div class="hero-social-warp">
+				<div class="hero-social">
+				{% for sociallink in sociallinks  %}
+					<a href="{{sociallink.lien}}"><i class="fa {{sociallink.icone_classe}}"></i></a>
+				{% endfor %}
+				</div>
+			</div>
+		
+    </section>
+    {% endblock header %}
+
+
+	{% block content %}	
+	<!-- Page top section end -->
+    <section class="fdb-block pt-5">
+            <div class="container">
+                
+                {% for new in news %}
+                <div class="row justify-content-center pb-5">
+                    <div class="col-12 text-center">
+                    <h2>{{new.titre}}</h2>
+                    </div>
+                    <section class="fdb-block pt-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                            <div class="col-12 col-md-8 text-center">
+                                <div class="row justify-content-center pb-5">
+                                <div class="col-4 col-sm-3 col-md-2"><img alt="image" class="fdb-icon" src="{{new.header_image.url}}"></div>
+                                </div>
+                        
+                                <p class="lead">{{new.extrait}}</p>
+                            </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>    
+                {% endfor %}
+                {% for image in images %}
+                {% if forloop.counter == 1 %}
+                <div class="row text-left align-items-center pt-5 pb-md-5">
+                    <div class="col-4 col-md-5">
+                    <img alt="image" class="img-fluid" src="{{image.image.url}}">
+                    </div>
+            
+                    <div class="col-12 col-md-5 m-md-auto">
+                    <p class="lead">{{image.description}} </p>
+                    </div>
+                </div>  
+                {% elif forloop.counter == 3 %}
+                <div class="row text-left align-items-center pt-5 pb-md-5">
+                    <div class="col-4 col-md-5">
+                    <img alt="image" class="img-fluid" src="{{image.image.url}}">
+                    </div>
+            
+                    <div class="col-12 col-md-5 m-md-auto">
+                    <p class="lead">{{image.description}} </p>
+                    </div>
+                </div>       
+                {% else %} 
+                <div class="row text-left align-items-center pt-5 pb-md-5">
+                    <div class="col-4 col-md-5 m-md-auto order-md-5">
+                    <img alt="image" class="img-fluid" src="{{image.image.url}}">
+                    </div>
+            
+                    <div class="col-12 col-md-5">
+                    <p class="lead">{{image.description}}</p>
+                    </div>
+                </div> 
+                {% endif %} 
+                {% endfor %}
+            </div>
+          </section>
+          <section class="fdb-block pt-5">
+            <div class="container">
+
+            
+            {% for new in news %}
+            <div class="row align-items-center">
+                <div class="col-10 col-sm-6 col-md-4 col-lg-3 m-auto m-md-0">
+                  <img alt="image" class="img-fluid rounded-circle" src="{{new.auteur.membre.avatar.url}}">
+                </div>
+          
+                <div class="col-12 col-md-8 ml-auto pt-5 pt-md-0">
+                  <h2>Auteur : {{new.auteur.membre.prenoms}}  {{new.auteur.membre.nom}} </h2>
+                  <p class="lead">{{new.auteur.membre.poste.nom}}</p>
+                  <p class="lead">Catégorie : {{new.categorie.nom}}, Tag : {{new.tag}}</p>
+                  <p class="lead">Date : {{new.date_add}} </p>
+                </div>
+            </div>   
+            {% endfor %}
+                
+              
+            </div>
+          </section>
+    <!-- Property overview section end-->
+    <div id="app">
+    <section class="pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 offset-lg-2">
+                    <div class="contact-info-box">
+                        <h5 class="contact-title">Laissez un commentaire</h5>
+                        <form class="contact-form">
+                            <div v-if="returntrue" class="alert alert-success" role="alert">
+                                Votre message a bien été envoyé, merci!
+                            </div>
+                            <div v-if="returnfalse" class="alert alert-danger" role="alert">
+                                Verifier que tous les champs sont bien remplis
+                            </div>
+                            <div class="form-field">
+                                <img src="/static/img/icons/profile.png" alt="" >
+                                <input v-model="nom" type="text" placeholder="Nom">
+                            </div>
+                            <div class="form-field">
+                                <img src="/static/img/icons/profile.png" alt="" >
+                                <input v-model="prenoms" type="text" placeholder="Prenoms">
+                            </div>
+                            <div class="form-field">
+                                <img src="/static/img/icons/envelope.png" alt="" >
+                                <input v-model="email" type="text" placeholder="Email">
+                            </div>
+                            <div class="form-field">
+                                <img src="/static/img/icons/chat.png" alt="" >
+                                <textarea v-model="commentaire" placeholder="Commentaire"></textarea>
+                            </div>
+                            <button class="site-btn"  v-on:click.prevent="comment">send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    
+        <div class="container py-2 mb-5">
+            
+            <!-- timeline item 1 -->
+            <div class="row no-gutters">
+                <div class="col-sm"> <!--spacer--> </div>
+                <!-- timeline item 1 center dot -->
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill bg-light border">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- timeline item 1 event content -->
+                <div class="col-sm py-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="float-right text-muted small">Jan 9th 2019 7:00 AM</div>
+                            <h4 class="card-title text-muted">Day 1 Orientation</h4>
+                            <p class="card-text">Welcome to the campus, introduction and get started with the tour.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/row-->
+            <!-- timeline item 2 -->
+            <div class="row no-gutters">
+                <div class="col-sm py-2">
+                    <div class="card border-success shadow">
+                        <div class="card-body">
+                            <div class="float-right text-success small">Jan 10th 2019 8:30 AM</div>
+                            <h4 class="card-title text-success">Day 2 Sessions</h4>
+                            <p class="card-text">Sign-up for the lessons and speakers that coincide with your course syllabus. Meet and greet with instructors.</p>
+                            <button class="btn btn-sm btn-outline-secondary" type="button" data-target="#t22_details" data-toggle="collapse">Show Details ▼</button>
+                            <div class="collapse border" id="t22_details">
+                                <div class="p-2 text-monospace">
+                                    <div>08:30 - 09:00 Breakfast in CR 2A</div>
+                                    <div>09:00 - 10:30 Live sessions in CR 3</div>
+                                    <div>10:30 - 10:45 Break</div>
+                                    <div>10:45 - 12:00 Live sessions in CR 3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill bg-success">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-sm"> <!--spacer--> </div>
+            </div>
+            <!--/row-->
+            <!-- timeline item 3 -->
+            <div class="row no-gutters">
+                <div class="col-sm"> <!--spacer--> </div>
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill bg-light border">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-sm py-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="float-right text-muted small">Jan 11th 2019 8:30 AM</div>
+                            <h4 class="card-title">Day 3 Sessions</h4>
+                            <p>Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
+                                bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/row-->
+            <!-- timeline item 4 -->
+            <div class="row no-gutters">
+                <div class="col-sm py-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="float-right text-muted small">Jan 12th 2019 11:30 AM</div>
+                            <h4 class="card-title">Day 4 Wrap-up</h4>
+                            <p>Join us for lunch in Bootsy's cafe across from the Campus Center.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill bg-light border">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-sm"> <!--spacer--> </div>
+            </div>
+            <!--/row-->
+        </div>
+	
+        {% endblock content %}

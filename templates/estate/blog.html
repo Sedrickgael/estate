@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}
+	estat: Bienvenu(e)!
+{% endblock title %}
+
+
+	{% block header %}
+	<!-- Page top section -->
+	
+	
+		{% for headerslide in headerslides %}
+		<section class="page-top-section set-bg" data-setbg="{{headerslide.image.url}}">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="page-top-text text-white">
+							<h2>{{headerslide.page.titre}}</h2>
+							<p>{{headerslide.description}}.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+			
+		
+			
+			
+			<div class="hero-social-warp">
+				<div class="hero-social">
+				{% for sociallink in sociallinks  %}
+					<a href="{{sociallink.lien}}"><i class="fa {{sociallink.icone_classe}}"></i></a>
+				{% endfor %}
+				</div>
+			</div>
+		
+			
+	</section>
+	<!-- Page top section end -->
+	{% endblock header %}
+
+
+	{% block content %}	
+	<!-- Blog section-->
+	<section class="blog-section spad ">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div  class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav" role="tablist">
+						<a  class="nav-link nav-item flex-sm-fill border-0 text-uppercase font-weight-bold active " href="#all" role="tab" data-toggle="tab">All</a>
+						{% for categorie in categories %}
+						<a class="nav-link nav-item flex-sm-fill border-0 text-uppercase font-weight-bold" href="#{{categorie.nom}}" role="tab" data-toggle="tab">{{categorie.nom}}</a>	
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<form class="blog-search">
+						<input type="text" placeholder="Search in News Articles">
+						<button><img src="/static/img/search.png" alt=""></button>
+					</form>
+				</div>
+			</div>
+			<div class="tab-content">
+				<div class="blog-item tab-pane fade show active" role="tabpanel" id="all">
+					
+					{% for allnew in allnews %}
+					<div class="row">
+						<div class="col-lg-4 col-md-5">
+							<div class="blog-thumb set-bg" data-setbg="{{allnew.header_image.url}}"></div>
+						</div>
+						<div class="col-lg-8 col-md-7">
+							<div class="blog-content">
+								<div class="blog-date">{{allnew.date_add}}</div>
+								<h2>{{allnew.auteur.membre.prenoms}} {{allnew.auteur.membre.nom}} <br> {{allnew.auteur.membre.poste.nom}}</h2>
+								<p>{{allnew.extrait}} </p>
+								<a href="{% url 'blogdetails' allnew.slug %}" class="site-btn">READ MORE</a>
+							</div>
+						</div>
+					</div><br>	
+					{% endfor %}
+						
+					
+				</div>
+				
+				{% for categorie in categories %}
+					{% for allnew in allnews %}
+						{% if allnew.categorie.id == categorie.id %}
+						<div class="blog-item tab-pane fade " role="tabpanel" id="{{categorie.nom}}">
+							<div class="row">
+								<div class="col-lg-4 col-md-5">
+									<div class="blog-thumb set-bg" data-setbg="{{allnew.header_image.url}}"></div>
+								</div>
+								<div class="col-lg-8 col-md-7">
+									<div class="blog-content">
+										<div class="blog-date">{{allnew.date_add}}</div>
+										<h2>{{allnew.auteur.membre.prenoms}} {{allnew.auteur.membre.nom}} <br> {{allnew.auteur.membre.poste.nom}}</h2>
+										<p>{{allnew.extrait}} </p>
+										<a href="{% url 'blogdetails' allnew.slug %}" class="site-btn">READ MORE</a>
+									</div>
+								</div>
+							</div><br>	
+						</div>		
+						{% endif %}	
+					{% endfor %}
+				{% endfor %}
+			</div>
+			<div class="text-center pt-4">
+				<button class="site-btn sb-solid">LOAD MORE</button>
+			</div>
+		</div>
+	</section>
+	<!-- Blog section end-->
+	{% endblock content %}

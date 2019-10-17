@@ -1,0 +1,162 @@
+{% extends "base.html"%}
+{% block title %}
+	estat: Bienvenu(e)!
+{% endblock title %}
+	
+{% block header %}
+		
+{% for headerslide in headerslides %}
+<section class="page-top-section set-bg" data-setbg="{{headerslide.image.url}}">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="page-top-text text-white">
+					<h2>{{headerslide.page.titre}}</h2>
+					<p>{{headerslide.description}}.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+	
+
+	
+	
+	<div class="hero-social-warp">
+		<div class="hero-social">
+		{% for sociallink in sociallinks  %}
+			<a href="{{sociallink.lien}}"><i class="fa {{sociallink.icone_classe}}"></i></a>
+		{% endfor %}
+		</div>
+	</div>
+	
+		
+</section>
+<!-- Page top section end -->
+{% endblock header %}
+
+
+
+{% block content %}
+	<!-- About section -->
+	
+	
+	
+		
+	<section class="about-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="about-text">
+						{% for about in abouts %}
+						<h4>{{about.nom_entreprise}}.</h4>
+						<p>{{about.description}}.</p>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="about-slider owl-carousel">
+						{% for slide in slides %}
+						<img src="/media/{{slide.image}}" alt="">
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+		
+	
+	<!-- About section end -->
+	
+	<!-- Milestone section end -->
+	<section class="milestone-section">
+		<div class="milestone-warp">
+			<div class="milestone">
+				
+				{% for villa_count in villa_counts %}
+				<h2>{{villa_count.count}}</h2>
+				{% endfor %}
+					
+				
+				<h4>Residential  Developed</h4>
+			</div>
+			<div class="milestone">
+
+				<h2>{{house_count}}</h2>
+				<h4>Homes Builded</h4>
+			</div>
+			<div class="milestone">
+				<h2>
+					{% for experience in experiences  %}
+						{{experience.annee}}
+					{% endfor %}
+				</h2>
+				<h4>Years of Experience</h4>
+			</div>
+			<div class="milestone">
+				<h2>{{plainte_count}}</h2>
+				<h4>Plaintes</h4>
+			</div>
+			<div class="milestone">
+				<h2>{{bureau_count}}</h2>
+				<h4>Bureaux</h4>
+			</div>
+		</div>
+	</section>
+	<!-- Milestone section end -->
+
+
+	<!-- Team section -->
+	<section class="team-section">
+		<div class="container">
+			<div class="row">
+				
+				{% for membre in membres %}
+				<div class="col-lg-6">
+					<div class="team-member">
+						<div class="member-pic">
+							<img src="{{membre.avatar.url}}" alt="">
+							<a href="#" class="member-link">+</a>
+						</div>
+						<div class="member-info">
+							<h4>{{membre.nom}} {{membre.prenoms}}</h4>
+							<h5>{{membre.poste.nom}}</h5>
+							<p>{{membre.bio}}</p>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+					
+				
+			</div>
+		</div>
+	</section>
+	<!-- Team section end -->
+
+	<!-- About box text -->
+	<div class="about-text-box-warp spad">
+		<div class="container">
+			<div class="row">
+				
+				{% for about in abouts %}
+				<div class="col-lg-6">
+					<div class="design-text">
+						<h4>JOIN OUR TEAM </h4>
+						<p>{{about.join_team_message}} </p>
+					</div>
+				</div>
+				{% endfor %}
+				{% for about in abouts %}
+				<div class="col-lg-6">
+					<div class="design-text">
+						<h4>WORK REMOTE </h4>
+						<p>{{about.work_remote}} </p>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- About box text end -->
+	{% endblock content %}

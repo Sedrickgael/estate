@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% block title %}
+	estat: Bienvenu(e)!
+{% endblock title %}
+	
+{% block header %}
+	<!-- Page top section -->
+	{% for headerslide in headerslides %}
+	<section class="page-top-section set-bg" data-setbg="{{headerslide.image.url}}">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="page-top-text text-white">
+						<h2>{{headerslide.page.titre}}</h2>
+						<p>{{headerslide.description}}.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+		
+	
+		
+		
+		<div class="hero-social-warp">
+			<div class="hero-social">
+			{% for sociallink in sociallinks  %}
+				<a href="{{sociallink.lien}}"><i class="fa {{sociallink.icone_classe}}"></i></a>
+			{% endfor %}
+			</div>
+		</div>
+		
+			
+	</section>
+	<!-- Page top section end -->
+	
+		
+	
+	{% endblock header %}
+
+
+	{% block content %}	
+
+	<!-- Property details section -->
+	<section class="property-details-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6 col-lg-7">
+					<div class="property-details">
+						
+						{% for house in houses %}
+						<h2>{{house.type_maison.types}}</h2>
+						<div class="property-info">
+							<h6>Lot Size</h6>
+							<div class="pi-icon">
+								<i class="flaticon-151-plans"></i>
+								<span>{{house.taille_lot}} </span>
+							</div>
+						</div>
+						{% endfor %}
+							
+						
+						{% for commodite in commodites %}
+						<div class="property-info">
+							<h6>{{commodite.nom}}</h6>
+							<div class="pi-icon">
+								<i class="{{commodite.icone_commodite}}"></i>
+								<span>3</span>
+							</div>
+						</div>	
+						{% endfor %}
+					</div>
+					{% for house in houses %}
+					<p>{{house.preview_text}}</p>
+					
+				</div>
+				<div class="col-xl-6 col-lg-5 text-lg-right text-left">
+					<div class="property-price">
+						<h2>{{house.prix}} FCFA</h2>
+						<p>(taxes excluded)</p>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Property details section end -->
+
+	<!-- Property features slider -->
+
+	<div class="property-features-slider owl-carousel">
+		
+		{% for interieur in interieurs %}
+		<a href="{{interieur.image.url}}" class="img-popup-gallery">
+			<img src="{{interieur.image.url}}" alt="">
+			<i class="flaticon-151-reading-glasses"></i>
+		</a>
+		{% endfor %}
+			
+		
+		{% for house in houses %}
+		<a href="{{house.image_fascade.url}}" class="img-popup-gallery">
+			<img src="{{house.image_fascade.url}}" alt="">
+			<i class="flaticon-151-reading-glasses"></i>
+		</a>	
+		{% endfor %}
+			
+	</div>
+	<!-- Property features slider end -->
+
+	<!-- Property overview section-->
+	<section class="property-overview-section spad pb-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="property-overview-text">
+						<h4>GENERAL OVERVIEW</h4>
+						{% for house in houses %}
+						<p>{{house.description}}</p>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="property-overview-text">
+						<h4>GENERAL OVERVIEW</h4>
+						<ul>
+							
+							{% for commodite in commodites  %}
+							<li>{{commodite.nom}}</li>	
+							{% endfor %}
+							{% for caracteristique in caracteristiques  %}
+							<li>{{caracteristique.nom}}</li>	
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid pt-5">
+			<div class="row">
+				
+				{% for interieur in interieurs %}
+				
+				{% if forloop.counter == 1 %}
+				<div class="col-lg-6 p-0">
+					<img src="{{interieur.image.url}}" alt="">
+				</div>
+				<div class="col-lg-6 p-0 d-flex align-items-center justify-content-center">
+					<div class="property-text-warp">
+						<div class="property-overview-text">
+							<p>{{interieur.description}}</p>
+						</div>
+					</div>
+				</div>	
+				{% elif forloop.counter == 2  %}
+				<div class="col-lg-6 p-0 d-flex align-items-center justify-content-center order-2 order-lg-1">
+					<div class="property-text-warp">
+						<div class="property-overview-text">
+							<p>{{interieur.description}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 p-0 order-1 order-lg-2">
+					<img src="{{interieur.image.url}}" alt="">
+				</div>		
+				{% endif %}
+					
+				
+				
+				{% endfor %}
+					
+				
+			</div>
+		</div>
+	</section>
+	<!-- Property overview section end-->
+
+	<!-- Call to action section -->
+	{% for consultant in consultants %}
+	<section class="call-to-action-section set-bg" data-setbg="/static/img/cta-bg.jpg">
+		<div class="container text-white text-center">
+			<h2>Ask our top consultants for an personalized offer today. </h2>
+			<h3>{{consultant.nom}} {{consultant.prenoms}}. </h3> <br>
+			<button class="site-btn sb-light sb-big">CALL {{consultant.contact}}</button>
+		</div>
+	</section>
+	{% endfor %}
+	<!-- Call to action section end-->
+
+	
+	{% endblock content %}
