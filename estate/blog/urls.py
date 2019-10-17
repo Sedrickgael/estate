@@ -32,7 +32,7 @@ router.register('categorieapi', CategorieViewSet, base_name='categorieapi')
 
 urlpatterns = [
     path('blogliste/', views.blog, name='blog'),
-    path('comment/<int:id>', views.comment, name='comment'),
+    path('comment/<id>', views.comment, name='comment'),
     path('blogdetails/<slug>', views.blogdetails,name='blogdetails'),
 ]
 

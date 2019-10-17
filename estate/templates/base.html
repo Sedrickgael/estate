@@ -285,7 +285,7 @@
                     
                     axios.defaults.xsrfCookieName = 'csrftoken'
                     axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-                    axios.post('http://127.0.0.1:8000/blog/comment/{{ new.id }}',
+                    axios.post('http://127.0.0.1:8000/blog/comment/{% for new in news %}{{new.id}}{% endfor %}',
                         formData, this.id, 
                         {
                             headers: {

@@ -45,7 +45,7 @@ def blogdetails(request, slug):
 
 
 def comment(request, id):
-    nom = request.POST.get('nom_complet')
+    nom = request.POST.get('nom')
     prenoms = request.POST.get('sujet')
     email = request.POST.get('email')
     commentaire = request.POST.get('message')
