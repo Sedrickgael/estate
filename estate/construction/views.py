@@ -10,7 +10,7 @@ def index(request):
         'sociallinks':  SocialLink.objects.all().order_by('?')[:5],
         'localistations':  Localisation.objects.all().order_by('?')[:1],
         'consultants':  Consultant.objects.all().order_by('?')[:1],
-        'interieurs':  Image_interieur.objects.all()[:5],
+        'interieurs':  Image_interieur.objects.all()[:4],
         'houses': House.objects.all().order_by('?')[:2],
         'identites':  Identite.objects.all()[:1],
         'otherpages':  OtherPage.objects.all(),
